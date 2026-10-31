@@ -1,0 +1,309 @@
+{
+  "facility": {
+    "name": "みらい技術センター",
+    "description": "ロボットやAIなどの新しい技術を研究し、地域の防災研修にも取り組む架空の施設です。",
+    "visitor_hours": "平日9時から17時"
+  },
+  "delivery_demo": {
+    "note": "最終課題の架空配達デモ用。実在の内線ではなく、実回線へ発信しない。",
+    "simulation_only": true,
+    "automatic_dial_allowed": false,
+    "contact_operator": "visitor",
+    "candidate_contact_order": [
+      "P005",
+      "P006"
+    ],
+    "candidate_order_note": "デモの確認順。受取人である可能性の順位ではない。",
+    "phone": {
+      "parent_place_id": "L_ENTRANCE",
+      "name": "デモ用内線電話",
+      "direction": "right",
+      "message": "ロボットに向かって右側に置いたデモ用内線電話をご利用ください。",
+      "layout_note": "動画用の配置。実施設の電話位置を示すものではない。"
+    },
+    "confirmation_statuses": {
+      "unconfirmed": "まだ電話で確認していない",
+      "no_answer": "電話に出なかったため未確認。自分宛ではないという否定と区別する",
+      "not_recipient": "配達者から、自分宛ではないと回答された旨の報告があった",
+      "confirmed": "配達者から、この人宛だと回答された旨の報告があった"
+    },
+    "confirmation_source": "visitor_report_of_phone_call",
+    "unresolved_action": "staff_review_with_confirmation_history"
+  },
+  "organizations": {
+    "O01": {
+      "name": "みらい技術センター",
+      "managed_by_us": true
+    },
+    "O02": {
+      "name": "地域防災連絡所",
+      "managed_by_us": false
+    }
+  },
+  "groups": {
+    "G01": {
+      "name": "企画調整グループ",
+      "aliases": [
+        "企画調整",
+        "企画グループ",
+        "第一グループ",
+        "規画調整",
+        "規画調整グループ",
+        "規格調整",
+        "規格調整グループ"
+      ],
+      "organization_id": "O01"
+    },
+    "G02": {
+      "name": "計測技術グループ",
+      "aliases": [
+        "計測",
+        "計測グループ",
+        "第二グループ"
+      ],
+      "organization_id": "O01"
+    },
+    "G03": {
+      "name": "研修支援グループ",
+      "aliases": [
+        "研修支援",
+        "研修グループ",
+        "第三グループ"
+      ],
+      "organization_id": "O01"
+    },
+    "G04": {
+      "name": "管理グループ",
+      "aliases": [
+        "管理部",
+        "管理",
+        "第四グループ"
+      ],
+      "organization_id": "O01"
+    }
+  },
+  "buildings": {
+    "B01": {
+      "name": "支援棟",
+      "organization_id": "O01",
+      "reception_route": "meeting"
+    },
+    "B02": {
+      "name": "研修棟",
+      "aliases": ["研修塔"],
+      "organization_id": "O01",
+      "reception_route": "other_building",
+      "wayfinding_message": "研修棟は建物を出て右側にお進みください。"
+    },
+    "B03": {
+      "name": "地域防災連絡所",
+      "aliases": [
+        "防災連絡所",
+        "県の防災拠点",
+        "オフサイトセンター"
+      ],
+      "organization_id": "O02",
+      "reception_route": "external_organization"
+    }
+  },
+  "reception": {
+    "delivery": {
+      "destination": "青い7番受付",
+      "direction": "left",
+      "message": "お荷物は左側の青い7番受付でお預かりします。"
+    },
+    "delivery_admin": {
+      "destination": "管理部受付",
+      "direction": "right",
+      "message": "お荷物は右側の管理部受付でお預かりします。"
+    },
+    "delivery_contact": {
+      "destination": "デモ用内線電話",
+      "direction": "right",
+      "message": "右側のデモ用内線電話をご利用ください。",
+      "contact_method": "extension"
+    },
+    "meeting": {
+      "destination": "総合受付",
+      "direction": "front",
+      "message": "正面の総合受付で、お名前とご訪問先をお伝えください。"
+    },
+    "other_building": {
+      "destination": "研修棟受付",
+      "direction": "right",
+      "message": "研修棟は建物を出て右側にお進みください。研修棟の受付でご用件をお伝えください。"
+    },
+    "external_organization": {
+      "destination": "地域防災連絡所の受付",
+      "direction": "left",
+      "message": "地域防災連絡所は当センターとは別の組織です。建物を出て左側の受付でお尋ねください。こちらでは先方の職員や予定は確認できません。"
+    },
+    "unknown": {
+      "destination": "総合受付",
+      "direction": "front",
+      "message": "ご案内先を確認できませんでした。恐れ入りますが、正面の総合受付にお尋ねください。"
+    }
+  },
+  "staff": {
+    "P001": {
+      "family_name": "田中",
+      "given_name": "太郎",
+      "reading": "たなかたろう",
+      "group_ids": [
+        "G02"
+      ],
+      "routes": {
+        "delivery": "delivery",
+        "meeting": "meeting"
+      },
+      "family_reading": "たなか"
+    },
+    "P002": {
+      "family_name": "佐藤",
+      "given_name": "花子",
+      "reading": "さとうはなこ",
+      "group_ids": [
+        "G04"
+      ],
+      "routes": {
+        "delivery": "delivery_admin",
+        "meeting": "meeting"
+      },
+      "family_reading": "さとう"
+    },
+    "P003": {
+      "family_name": "山田",
+      "given_name": "一郎",
+      "reading": "やまだいちろう",
+      "group_ids": [
+        "G01",
+        "G03"
+      ],
+      "routes": {
+        "delivery": "delivery",
+        "meeting": "meeting"
+      },
+      "family_reading": "やまだ"
+    },
+    "P004": {
+      "family_name": "山田",
+      "given_name": "恵子",
+      "reading": "やまだけいこ",
+      "group_ids": [
+        "G03"
+      ],
+      "routes": {
+        "delivery": "delivery_admin",
+        "meeting": "meeting"
+      },
+      "family_reading": "やまだ"
+    },
+    "P005": {
+      "family_name": "斎藤",
+      "given_name": "一郎",
+      "demo_extension": "8101",
+      "reading": "さいとういちろう",
+      "group_ids": [
+        "G01"
+      ],
+      "routes": {
+        "delivery": "delivery",
+        "meeting": "meeting"
+      },
+      "family_reading": "さいとう",
+      "family_aliases": [
+        "斉藤",
+        "齊藤"
+      ]
+    },
+    "P006": {
+      "family_name": "齋藤",
+      "given_name": "一郎",
+      "demo_extension": "8201",
+      "reading": "さいとういちろう",
+      "group_ids": [
+        "G02"
+      ],
+      "routes": {
+        "delivery": "delivery_admin",
+        "meeting": "meeting"
+      },
+      "family_reading": "さいとう",
+      "family_aliases": [
+        "斉藤",
+        "齊藤"
+      ]
+    },
+    "P007": {
+      "family_name": "加藤",
+      "given_name": "誠",
+      "reading": "かとうまこと",
+      "group_ids": [
+        "G01",
+        "G02"
+      ],
+      "routes": {
+        "delivery": "delivery",
+        "meeting": "meeting"
+      },
+      "family_reading": "かとう"
+    },
+    "P008": {
+      "family_name": "西村",
+      "given_name": "美咲",
+      "reading": "にしむらみさき",
+      "group_ids": [],
+      "role": "センター付",
+      "routes": {
+        "delivery": "delivery_admin",
+        "meeting": "meeting"
+      },
+      "family_reading": "にしむら"
+    },
+    "P009": {
+      "family_name": "高橋",
+      "given_name": "健",
+      "reading": "たかはしけん",
+      "group_ids": [
+        "G03"
+      ],
+      "routes": {
+        "delivery": "delivery",
+        "meeting": "meeting"
+      },
+      "family_reading": "たかはし"
+    },
+    "P010": {
+      "family_name": "小林",
+      "given_name": "愛",
+      "reading": "こばやしあい",
+      "group_ids": [
+        "G04"
+      ],
+      "routes": {
+        "delivery": "delivery_admin",
+        "meeting": "meeting"
+      },
+      "family_reading": "こばやし"
+    },
+    "P011": {
+      "family_name": "森川",
+      "given_name": "将大",
+      "name_aliases": ["森川將大"],
+      "reading": "もりかわまさひろ",
+      "family_reading": "もりかわ",
+      "group_ids": ["G01"],
+      "demo_extension": "8102",
+      "routes": {"delivery": "delivery_contact", "meeting": "meeting"}
+    },
+    "P012": {
+      "family_name": "森川",
+      "given_name": "健一",
+      "reading": "もりかわけんいち",
+      "family_reading": "もりかわ",
+      "group_ids": ["G02"],
+      "demo_extension": "8202",
+      "routes": {"delivery": "delivery_contact", "meeting": "meeting"}
+    }
+  }
+}

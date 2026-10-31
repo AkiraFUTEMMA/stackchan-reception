@@ -1,0 +1,200 @@
+{
+  "schema_version": 1,
+  "note": "公開提出用の完全架空施設データ。実在の所在地、職員や安全ルールには対応しない。",
+  "locations": {
+    "L_ENTRANCE": {
+      "name": "支援棟1階 総合受付",
+      "aliases": [
+        "総合受付",
+        "正面受付",
+        "受付窓口",
+        "支援棟受付"
+      ],
+      "building": "B01",
+      "floor": "1階",
+      "direction": "front",
+      "how_to_get_there": "ロボットの正面にある総合受付です。",
+      "visitor_access": "public",
+      "managed_by_us": true
+    },
+    "L_PLANNING": {
+      "name": "支援棟1階 企画調整室",
+      "aliases": [
+        "企画調整室",
+        "企画調整グループの部屋"
+      ],
+      "building": "B01",
+      "floor": "1階",
+      "direction": "front",
+      "how_to_get_there": "このロボットの正面にある部屋です。",
+      "visitor_access": "staff_only",
+      "first_checkin": "L_ENTRANCE",
+      "managed_by_us": true
+    },
+    "L_MEASURE": {
+      "name": "支援棟2階 計測技術室",
+      "aliases": [
+        "計測技術室",
+        "計測技術グループの部屋"
+      ],
+      "building": "B01",
+      "floor": "2階",
+      "direction": "right",
+      "how_to_get_there": "右手の階段を利用して2階へお進みください。",
+      "visitor_access": "staff_only",
+      "first_checkin": "L_ENTRANCE",
+      "managed_by_us": true
+    },
+    "L_TRAINING": {
+      "name": "研修棟2階 第2講習室",
+      "aliases": [
+        "第2講習室",
+        "研修会場",
+        "研修棟の第2講習室"
+      ],
+      "building": "B02",
+      "floor": "2階",
+      "direction": "right",
+      "how_to_get_there": "建物を出て右側の研修棟に進み、2階へお上がりください。",
+      "visitor_access": "checkin_required",
+      "first_checkin": "L_ENTRANCE",
+      "managed_by_us": true
+    },
+    "L_SEMINAR1": {
+      "name": "研修棟1階 第1講習室",
+      "aliases": [
+        "第1講習室",
+        "初級講習室"
+      ],
+      "building": "B02",
+      "floor": "1階",
+      "direction": "right",
+      "how_to_get_there": "建物を出て右側の研修棟に進み、1階の講習室へお進みください。",
+      "visitor_access": "checkin_required",
+      "first_checkin": "L_ENTRANCE",
+      "managed_by_us": true
+    },
+    "L_OTHER_ORG": {
+      "name": "地域防災連絡所受付",
+      "aliases": [
+        "地域防災連絡所",
+        "防災連絡所",
+        "オフサイトセンター"
+      ],
+      "building": "B03",
+      "floor": "1階",
+      "direction": "left",
+      "how_to_get_there": "建物を出て左側の地域防災連絡所の受付でお尋ねください。",
+      "visitor_access": "external",
+      "managed_by_us": false
+    },
+    "L_LOUNGE": {
+      "name": "支援棟1階 休憩ラウンジ",
+      "aliases": [
+        "休憩ラウンジ",
+        "休憩室",
+        "飲食場所"
+      ],
+      "building": "B01",
+      "floor": "1階",
+      "direction": "left",
+      "how_to_get_there": "受付左側の休憩ラウンジです。",
+      "visitor_access": "public",
+      "managed_by_us": true
+    },
+    "L_SMOKING": {
+      "name": "屋外指定喫煙所",
+      "aliases": [
+        "喫煙所",
+        "喫煙場所",
+        "たばこを吸える場所"
+      ],
+      "building": "B01",
+      "floor": "屋外",
+      "direction": "right",
+      "how_to_get_there": "正面玄関を出て右手の表示に従って屋外指定喫煙所にお進みください。",
+      "visitor_access": "public",
+      "managed_by_us": true
+    },
+    "L_ADMIN": {
+      "name": "管理部受付",
+      "aliases": [
+        "管理部受付",
+        "管理受付"
+      ],
+      "building": "B01",
+      "floor": "1階",
+      "direction": "right",
+      "how_to_get_there": "右側の管理部受付へお進みください。",
+      "visitor_access": "public",
+      "managed_by_us": true
+    },
+    "L_DELIVERY": {
+      "name": "青い7番受付",
+      "aliases": [
+        "7番受付",
+        "青い受付",
+        "荷物受付"
+      ],
+      "building": "B01",
+      "floor": "1階",
+      "direction": "left",
+      "how_to_get_there": "左側の青い7番受付へお進みください。",
+      "visitor_access": "public",
+      "managed_by_us": true
+    }
+  },
+  "staff_workplaces": {
+    "P005": "L_PLANNING",
+    "P006": "L_MEASURE",
+    "P003": "L_PLANNING",
+    "P009": "L_TRAINING"
+  },
+  "trainings": {
+    "T101": {
+      "name": "環境モニタリング基礎研修",
+      "aliases": [
+        "モニタリング基礎研修",
+        "環境モニタリング研修"
+      ],
+      "date": "2026-10-27",
+      "time": "09:30〜16:30",
+      "venue": "L_TRAINING",
+      "first_checkin": "L_ENTRANCE",
+      "notes": "受講者は支援棟1階の総合受付で手続き後、研修棟へ移動します。"
+    },
+    "T102": {
+      "name": "防災対応実務ワークショップ",
+      "aliases": [
+        "防災対応研修",
+        "防災ワークショップ"
+      ],
+      "date": "2026-10-29",
+      "time": "10:00〜15:00",
+      "venue": "L_SEMINAR1",
+      "first_checkin": "L_ENTRANCE",
+      "notes": "受講者は支援棟1階の総合受付で受付を済ませてください。"
+    }
+  },
+  "policies": {
+    "food": {
+      "allowed_place": "L_LOUNGE",
+      "prohibited_place_ids": [
+        "L_ENTRANCE",
+        "L_PLANNING",
+        "L_MEASURE",
+        "L_TRAINING",
+        "L_SEMINAR1"
+      ],
+      "message": "飲食は1階の休憩ラウンジをご利用ください。受付周辺と執務室・講習室での食事はご遠慮ください。"
+    },
+    "drink": {
+      "allowed_place": "L_LOUNGE",
+      "message": "飲み物は1階の休憩ラウンジでお取りください。講習室の持ち込み条件は研修担当者にご確認ください。"
+    },
+    "smoking": {
+      "allowed_place": "L_SMOKING",
+      "message": "喫煙は屋外の指定喫煙所のみ可能です。館内は禁煙です。"
+    }
+  }
+}

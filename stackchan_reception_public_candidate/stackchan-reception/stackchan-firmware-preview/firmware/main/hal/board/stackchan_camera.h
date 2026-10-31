@@ -1,0 +1,106 @@
+#pragma once
+#include "sdkconfig.h"
+
+#ifndef CONFIG_IDF_TARGET_ESP32
+#include <lvgl.h>
+#include <thread>
+#include <memory>
+#include <vector>
+#include <atomic>
+#include <mutex>
+#include <cstdint>
+
+#include <freertos/FreeRTOS.h>
+#include <freertos/queue.h>
+
+#include "camera.h"
+#include "jpg/image_to_jpeg.h"
+#include "esp_video_init.h"
+
+struct JpegChunk {
+    uint8_t* data;
+    size_t len;
+};
+
+class StackChanCamera : public Camera {
+private:
+    struct FrameBuffer {
+        uint8_t* data         = nullptr;
+        size_t len            = 0;
+        uint16_t width        = 0;
+        uint16_t height       = 0;
+        v4l2_pix_fmt_t format = 0;
+    } frame_;
+    v4l2_pix_fmt_t sensor_format_ = 0;
+#ifdef CONFIG_XIAOZHI_ENABLE_ROTATE_CAMERA_IMAGE
+    uint16_t sensor_width_  = 0;
+    uint16_t sensor_height_ = 0;
+#endif  // CONFIG_XIAOZHI_ENABLE_ROTATE_CAMERA_IMAGE
+    int video_fd_      = -1;
+    bool streaming_on_ = false;
+    struct MmapBuffer {
+        void* start   = nullptr;
+        size_t length = 0;
+    };
+    std::vector<MmapBuffer> mmap_buffers_;
+    std::string explain_url_;
+    std::string explain_token_;
+    std::thread encoder_thread_;
+
+    // Local preview runs independently from the cloud AI. Capture() stops it
+    // before the ordinary XiaoZhi photo/Explain path takes over.
+    std::atomic<bool> live_preview_active_{false};
+    std::atomic<unsigned int> live_preview_frames_{0};
+    std::thread live_preview_thread_;
+    std::mutex capture_mutex_;
+    // A touch-initiated photo is retained briefly for the next AI camera
+    // tool call, preventing a second shot after the visitor has framed it.
+    std::thread touch_capture_thread_;
+    std::atomic<bool> touch_capture_busy_{false};
+    std::atomic<bool> touch_snapshot_pending_{false};
+    std::atomic<int64_t> touch_snapshot_timestamp_us_{0};
+    bool CaptureFrame(bool play_shutter);
+
+public:
+    StackChanCamera(const esp_video_init_config_t& config);
+    ~StackChanCamera();
+
+    virtual void SetExplainUrl(const std::string& url, const std::string& token);
+    virtual bool Capture() override;
+    bool StreamCaptures();
+
+    bool StartLivePreview();
+    void StopLivePreview();
+    // Non-blocking entry point; safe to call from LVGL click callbacks.
+    bool StartTouchSnapshot();
+    bool IsLivePreviewActive() const { return live_preview_active_.load(); }
+    unsigned int GetLivePreviewFrameCount() const { return live_preview_frames_.load(); }
+
+    // 翻转控制函数
+    virtual bool SetHMirror(bool enabled) override;
+    virtual bool SetVFlip(bool enabled) override;
+    virtual std::string Explain(const std::string& question);
+
+    const uint8_t* GetFrameData()
+    {
+        return frame_.data;
+    }
+    size_t GetFrameSize()
+    {
+        return frame_.len;
+    }
+    int GetFrameWidth()
+    {
+        return frame_.width;
+    }
+    int GetFrameHeight()
+    {
+        return frame_.height;
+    }
+    int GetFrameFormat()
+    {
+        return frame_.format;
+    }
+};
+
+#endif  // ndef CONFIG_IDF_TARGET_ESP32
