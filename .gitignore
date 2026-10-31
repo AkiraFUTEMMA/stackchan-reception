@@ -1,0 +1,27 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+
+# Local settings and logs
+.env
+.env.*
+start.txt
+*.log
+*.jsonl
+
+# Local working files
+.codex-work/
+old/
+mcp-calculator/
+
+# Media and documents
+*.mp4
+*.mov
+/*.pdf
+!/sample_recipient_label.pdf
+
+# Firmware build files
+**/build/
+**/sdkconfig
+**/sdkconfig.old
